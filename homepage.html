@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>rec-op — Home</title>
+  <style>
+    /* Theme variables (light by default) */
+    :root{
+      --accent-blue:#0b79d0;
+      --accent-green:#2e7d32;
+      --accent:var(--accent-blue);
+      --bg:#f7f9fb;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#666;
+      --white:#ffffff;
+      --black:#000000;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 1px 6px rgba(11,23,40,0.06);
+      --transition: 180ms ease-in-out;
+    }
+
+    body.theme-dark{
+      --accent:var(--accent-green);
+      --bg:#07080a; 
+      --card:#0f1113;
+      --text:#e6eef6;
+      --muted:#9aa5b1;
+      --white:#000000;
+      --glass: rgba(0,0,0,0.35);
+      --shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    
+    /* Result card styling */
+    .result-card{
+      background:var(--card);
+      border-radius:8px;
+      padding:12px;
+      margin-bottom:10px;
+      box-shadow:var(--shadow);
+      transition:background var(--transition), color var(--transition);
+      color:var(--text);
+    }
+    .result-header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .result-title{font-weight:700}
+    .result-status{font-weight:700}
+    .result-score{font-size:18px;font-weight:800;margin-top:6px}
+    .result-bar{height:8px;background:rgba(0,0,0,0.06);border-radius:8px;overflow:hidden;margin-top:8px}
+    .result-bar > div{height:100%;border-radius:8px}
+    .result-meta{margin-top:8px;color:var(--muted);font-size:13px}
+    .result-link{display:block;margin-top:8px;font-size:13px}
+    .result-link a{color:var(--accent);text-decoration:none;font-weight:600}
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:background var(--transition), color var(--transition);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    header{
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    body.theme-dark header{
+      background: linear-gradient(90deg, rgba(15,17,19,0.6), rgba(15,17,19,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .brand{font-weight:700;display:flex;gap:8px;align-items:center}
+    .brand .sub{font-size:12px;color:var(--muted)}
+    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    .hero{padding:36px 20px;text-align:center}
+    .hero h1{margin:0 0 12px;font-size:28px;color:var(--accent)}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .features{display:grid;gap:16px;padding:20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:8px;
+      box-shadow:var(--shadow);
+      transition:background var(--transition), color var(--transition);
+      color:var(--text);
+    }
+    footer{padding:16px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.06);background:var(--card);margin-top:20px}
+    label{display:block;font-size:13px;color:var(--text)}
+    input,select,button{font-family:inherit}
+    @media(min-width:760px){.hero h1{font-size:40px}}
+
+    .small-btn{
+      padding:8px 12px;border-radius:6px;border:none;cursor:pointer;font-weight:600;
+      background:transparent;color:var(--text);transition:background var(--transition), color var(--transition);
+    }
+    .small-btn.secondary{background:rgba(0,0,0,0.04)}
+    .small-btn:hover{background:var(--glass)}
+
+    .search-row {display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .search-row input[type="search"]{flex:1;padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:6px;background:transparent;color:var(--text)}
+    .search-row input::placeholder{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <a href="index.html" style="text-decoration:none;color:inherit">
+        <div style="font-size:18px">rec-op</div>
+        <div class="sub">game compatibility helper</div>
+      </a>
+    </div>
+
+    <nav style="display:flex;align-items:center;gap:12px">
+      <a href="homepage.html">Home</a>
+      <a href="features page.html">Features</a>
+      <a href="contact page.html">Contact</a>
+      <button id="themeToggle" class="small-btn" aria-label="Toggle theme">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero card" style="margin-top:18px">
+      <h1>Find games that run on your PC</h1>
+      <p>Enter your PC specs and we'll show games that match your configuration.</p>
+      <p><a href="#checker" style="color:var(--white);background:var(--accent);padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:600">Check Now</a></p>
+    </section>
+
+    <section id="checker" style="margin-top:18px">
+      <div class="card">
+        <h3>PC Requirements → Compatible Games</h3>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px">
+          <label>
+            CPU tier
+            <select id="cpu" aria-label="CPU tier">
+              <option value="very-low">Very Low (older dual-core)</option>
+              <option value="low">Low (i3 / Ryzen 3)</option>
+              <option value="medium">Medium (i5 / Ryzen 5)</option>
+              <option value="high">High (i7/i9 / Ryzen 7/9)</option>
+              <option value="enthusiast">Enthusiast (Threadripper / HEDT)</option>
+            </select>
+          </label>
+
+          <label>
+            GPU tier
+            <select id="gpu">
+              <option value="0">Very old / weak integrated</option>
+              <option value="1">Integrated / Entry-level</option>
+              <option value="2">GTX 1050 / MX</option>
+              <option value="3">GTX 1650 / GTX 1060</option>
+              <option value="4">RTX 2060 / RX 5600</option>
+              <option value="5">RTX 3070 / RX 6800</option>
+              <option value="6">RTX 4080 / 4090</option>
+              <option value="7">Enthusiast / Professional</option>
+            </select>
+          </label>
+
+          <label>
+            RAM (GB)
+            <input id="ram" type="number" min="2" step="1" value="8" />
+          </label>
+
+          <label>
+            Free storage (GB)
+            <input id="storage" type="number" min="1" step="1" value="50" />
+          </label>
+
+          <label>
+            OS
+            <select id="os">
+              <option>Windows 10</option>
+              <option>Windows 11</option>
+              <option>Windows 8.1</option>
+              <option>Windows 7</option>
+              <option>Linux</option>
+              <option>SteamOS/Proton</option>
+              <option>Steam (PC)</option>
+              <option>Xbox One / Series</option>
+              <option>macOS</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px;align-items:center;flex-wrap:wrap">
+          <button id="checkBtn" class="small-btn" style="background:var(--accent);color:var(--white)">Check games</button>
+          <button id="resetBtn" class="small-btn secondary" style="border:none">Reset</button>
+        </div>
+
+        <div class="search-row" style="margin-top:12px">
+          <input id="gameSearch" type="search" placeholder="Search games by name (press Enter or click Search)" />
+          <button id="searchBtn" class="small-btn">Search</button>
+          <button id="clearSearch" class="small-btn secondary">Clear</button>
+        </div>
+
+        <div id="results" aria-live="polite" style="margin-top:12px"></div>
+        <div id="gameDetails" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <section class="features" style="margin-top:18px">
+      <div class="card">
+        <h3>Settings</h3>
+        <p>Save preferred presets and recommended in-game settings for better performance.</p>
+      </div>
+      <div class="card">
+        <h3>Community</h3>
+        <p>Share your build and see what games others with similar systems play.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 rec-op — Built with a love for gaming.
+  </footer>
+
+  <script>
+    const games = [
+      { name: "Indie Puzzle", cpu: "low", gpu: 1, ram: 4, storage: 2, os: ["Windows 10","Windows 11","Linux","macOS"] },
+      { name: "Terraria", cpu: "low", gpu: 1, ram: 2, storage: 0.5, os: ["Windows 10","Windows 11","Linux","macOS"] },
+      { name: "Stardew Valley", cpu: "low", gpu: 1, ram: 4, storage: 1, os: ["Windows 10","Windows 11","Linux","macOS"] },
+      { name: "Minecraft", cpu: "low", gpu: 1, ram: 4, storage: 2, os: ["Windows 10","Windows 11","Linux","macOS","Xbox One / Series"] },
+      { name: "Among Us", cpu: "low", gpu: 1, ram: 2, storage: 1, os: ["Windows 10","Windows 11","Linux","macOS"] },
+      { name: "Hades", cpu: "low", gpu: 1, ram: 4, storage: 10, os: ["Windows 10","Windows 11","Linux","macOS"] },
+
+      { name: "CS:GO", cpu: "medium", gpu: 2, ram: 4, storage: 20, os: ["Windows 10","Windows 11","Linux"] },
+      { name: "DOTA 2", cpu: "medium", gpu: 2, ram: 8, storage: 15, os: ["Windows 10","Windows 11","Linux"] },
+      { name: "Rocket League", cpu: "medium", gpu: 2, ram: 8, storage: 10, os: ["Windows 10","Windows 11","macOS"] },
+      { name: "Fortnite", cpu: "medium", gpu: 3, ram: 8, storage: 30, os: ["Windows 10","Windows 11","macOS"] },
+      { name: "Valorant", cpu: "medium", gpu: 2, ram: 4, storage: 15, os: ["Windows 10","Windows 11"] },
+      { name: "Apex Legends", cpu: "medium", gpu: 3, ram: 8, storage: 22, os: ["Windows 10","Windows 11"] },
+      { name: "Overwatch 2", cpu: "medium", gpu: 3, ram: 8, storage: 30, os: ["Windows 10","Windows 11","macOS"] },
+
+      { name: "GTA V", cpu: "medium", gpu: 3, ram: 8, storage: 80, os: ["Windows 10","Windows 11"] },
+      { name: "GTA IV", cpu: "medium", gpu: 2, ram: 2, storage: 16, os: ["Windows 10","Windows 11"] },
+
+      { name: "The Witcher 3", cpu: "high", gpu: 5, ram: 8, storage: 50, os: ["Windows 10","Windows 11"] },
+      { name: "Skyrim Special Edition", cpu: "medium", gpu: 3, ram: 8, storage: 12, os: ["Windows 10","Windows 11","macOS"] },
+      { name: "Subnautica", cpu: "medium", gpu: 3, ram: 8, storage: 20, os: ["Windows 10","Windows 11","macOS"] },
+      { name: "Civilization VI", cpu: "medium", gpu: 3, ram: 8, storage: 20, os: ["Windows 10","Windows 11","Linux","macOS"] },
+
+      { name: "Red Dead Redemption 2", cpu: "high", gpu: 6, ram: 12, storage: 150, os: ["Windows 10","Windows 11"] },
+      { name: "Elden Ring", cpu: "high", gpu: 6, ram: 12, storage: 60, os: ["Windows 10","Windows 11"] },
+      { name: "Cyberpunk 2077", cpu: "high", gpu: 6, ram: 16, storage: 70, os: ["Windows 10","Windows 11"] },
+      { name: "Baldur's Gate 3", cpu: "high", gpu: 5, ram: 16, storage: 70, os: ["Windows 10","Windows 11","macOS"] },
+
+      { name: "PUBG: Battlegrounds", cpu: "medium", gpu: 3, ram: 8, storage: 30, os: ["Windows 10","Windows 11"] },
+      { name: "Call of Duty: Modern Warfare", cpu: "high", gpu: 5, ram: 12, storage: 90, os: ["Windows 10","Windows 11"] },
+      { name: "Red Faction (example)", cpu: "medium", gpu: 3, ram: 8, storage: 25, os: ["Windows 10","Windows 11","Linux"] }
+      // Steam-only / Steam-first examples
+      ,{ name: "Hollow Knight (Steam)", cpu: "low", gpu: 1, ram: 4, storage: 6, os: ["Steam","Windows 10","Windows 11","macOS","Linux"] }
+      ,{ name: "Untitled Goose Game (Steam)", cpu: "low", gpu: 1, ram: 2, storage: 1.5, os: ["Steam","Windows 10","Windows 11","macOS","Linux"] }
+      // Xbox examples (console)
+      ,{ name: "Halo Infinite (Xbox)", cpu: "high", gpu: 6, ram: 12, storage: 80, os: ["Xbox One / Series"] }
+      ,{ name: "Forza Horizon 4 (Xbox)", cpu: "medium", gpu: 4, ram: 8, storage: 60, os: ["Xbox One / Series"] }
+    ];
+ 
+    function mapCpuToRank(cpu) { 
+      switch (cpu) {
+        case 'very-low': return 0.5;
+        case 'low': return 1;
+        case 'medium': return 2;
+        case 'high': return 3;
+        case 'enthusiast': return 4;
+        default: return 1;
+      }
+    }
+ 
+    // Return compatibility score (0..1) between selected OS and game's supported OS list
+    function isOsCompatible(specOs, gameOsList) {
+      // exact match first
+      if (gameOsList.includes(specOs)) return 1;
+      // Steam-labeled games normally run on Windows/macOS/Linux via Steam
+      if (gameOsList.includes('Steam') && (specOs.includes('Windows') || specOs === 'Linux' || specOs === 'macOS' || specOs === 'SteamOS/Proton')) return 1;
+      // SteamOS/Proton can run many Windows Steam titles
+      if (specOs === 'SteamOS/Proton' && (gameOsList.includes('Linux') || gameOsList.includes('Steam'))) return 1;
+      // Xbox console support only matches if user selected an Xbox console
+      if (gameOsList.includes('Xbox One / Series') && specOs.includes('Xbox')) return 1;
+      // fall back: older Windows may partially work with newer-targeted Windows games
+      if ((specOs === 'Windows 7' || specOs === 'Windows 8.1') && (gameOsList.includes('Windows 10') || gameOsList.includes('Windows 11'))) return 0.8;
+      return 0;
+    }
+ 
+     function scoreGame(spec, game) {
+       const cpuSpec = mapCpuToRank(spec.cpu);
+       const cpuReq = mapCpuToRank(game.cpu);
+ 
+       const cpuScore = cpuSpec >= cpuReq ? 1 : (cpuSpec / cpuReq);
+       const gpuScore = spec.gpu >= game.gpu ? 1 : (spec.gpu / game.gpu);
+       const ramScore = spec.ram >= game.ram ? 1 : (spec.ram / game.ram);
+       const storageScore = spec.storage >= game.storage ? 1 : (spec.storage / game.storage);
+       const osScore = isOsCompatible(spec.os, game.os);
+ 
+       const weights = { cpu: 0.25, gpu: 0.30, ram: 0.20, storage: 0.05, os: 0.20 };
+       const raw = (cpuScore * weights.cpu) + (gpuScore * weights.gpu) + (ramScore * weights.ram) + (storageScore * weights.storage) + (osScore * weights.os);
+       const score = Math.round(raw * 100);
+ 
+       const issues = [];
+       const tips = [];
+      if (osScore === 0) issues.push(`OS: ${spec.os} not supported`);
+      if (osScore > 0 && osScore < 1) tips.push(`OS: ${spec.os} may work (partial compatibility)`);
+       if (cpuSpec < cpuReq) tips.push('Lower CPU-heavy settings or close background apps');
+       if (spec.gpu < game.gpu) tips.push('Lower graphics quality (shadows, textures)');
+       if (spec.ram < game.ram) issues.push(`RAM needs ${game.ram} GB`);
+       if (spec.storage < game.storage) issues.push(`Free storage needs ${game.storage} GB`);
+ 
+       return { game, score, issues, tips };
+     }
+    // simple HTML escape for inline onclick string
+    function escapeHtml(str){ return String(str).replace(/'/g, "\\'").replace(/"/g,'&quot;'); }
+
+    // slugify a game name to a local page filename (e.g. "PUBG: Battlegrounds" -> "pubg-battlegrounds.html")
+    function slugify(name){
+      return name.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // spaces to dashes
+        .replace(/[:'’".,()/&]+/g, '')  // remove punctuation
+        .replace(/[^a-z0-9\-]+/g, '')   // remove invalid chars
+        .replace(/\-+/g, '-')
+        .replace(/^\-+|\-+$/g, '');
+    }
+ 
+    // Show a game's full requirements in the dedicated details panel
+    function showGameDetails(name){
+      const game = games.find(g => g.name === name);
+      const details = document.getElementById('gameDetails');
+      if (!game) { details.innerHTML = '<div class="card">Game not found.</div>'; return; }
+      const oceanSearch = 'https://oceanofgames.com/?s=' + encodeURIComponent(game.name);
+      const localPage = 'games/' + slugify(game.name) + '.html';
+      details.innerHTML = `
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:800;font-size:18px">${game.name}</div>
+              <div style="color:var(--muted);margin-top:6px">Platforms: ${game.os.join(', ')}</div>
+            </div>
+            <div><button class="small-btn" onclick="document.getElementById('gameDetails').innerHTML=''">Close</button></div>
+          </div>
+          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+            <div><strong>CPU tier</strong><div style="margin-top:6px">${game.cpu}</div></div>
+            <div><strong>GPU tier</strong><div style="margin-top:6px">${game.gpu}</div></div>
+            <div><strong>RAM</strong><div style="margin-top:6px">${game.ram} GB</div></div>
+            <div><strong>Storage</strong><div style="margin-top:6px">${game.storage} GB</div></div>
+          </div>
+          <p style="margin-top:12px">
+            <a href="${localPage}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);margin-right:10px">Open game page</a>
+            <a href="${oceanSearch}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open on Ocean of Games (search)</a>
+          </p>
+        </div>
+      `;
+      details.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+ 
+    // Search helper: filter games by name and show results (scored against current spec)
+    function performSearch(query){
+      const spec = {
+        cpu: document.getElementById('cpu').value,
+        gpu: Number(document.getElementById('gpu').value),
+        ram: Number(document.getElementById('ram').value),
+        storage: Number(document.getElementById('storage').value),
+        os: document.getElementById('os').value
+      };
+      const filtered = games.filter(g => g.name.toLowerCase().includes(query.toLowerCase()));
+      const scored = filtered.map(g => scoreGame(spec, g)).sort((a,b) => b.score - a.score);
+      renderResults(scored);
+    }
+ 
+    // update renderResults to include a link to local pages (if you add them below)
+    function renderResults(items) {
+      const results = document.getElementById('results');
+      if (!items || !items.length) {
+        results.innerHTML = '<div class="card" style="background:#fff;padding:12px">No games found.</div>';
+        return;
+      }
+      results.innerHTML = items.map(item => {
+        const s = item.score;
+        // REMOVED: const status = s >= 70 ? 'Compatible' : s >= 40 ? 'Playable (lower settings)' : 'Not recommended';
+        const color = s >= 70 ? '#2e7d32' : s >= 40 ? '#f57c00' : '#d32f2f';
+        const issuesHtml = item.issues.length ? `<div style="color:#b00;margin-top:6px">Issues: ${item.issues.join('; ')}</div>` : '';
+        const tipsHtml = item.tips.length ? `<div style="color:#555;margin-top:6px">Tips: ${item.tips.join('; ')}</div>` : '';
+        const oceanSearch = 'https://oceanofgames.com/?s=' + encodeURIComponent(item.game.name);
+        const localPage = 'games/' + slugify(item.game.name) + '.html';
+        return `
+          <div class="result-card">
+            <div class="result-header">
+              <div>
+                <div class="result-title" style="cursor:pointer;text-decoration:underline;color:var(--accent)" onclick="showGameDetails('${escapeHtml(item.game.name)}')">${item.game.name}</div>
+                <div class="result-link">
+                  <a href="${localPage}" target="_blank" rel="noopener noreferrer">Game page</a> ·
+                  <a href="${oceanSearch}" target="_blank" rel="noopener noreferrer">Ocean of Games</a> ·
+                  <button class="small-btn" onclick="showGameDetails('${escapeHtml(item.game.name)}')">Show requirements</button>
+                </div>
+              </div>
+              </div>
+            <div class="result-score" style="color:${color}">${s}%</div>
+            <div class="result-bar">
+              <div style="width:${s}%;background:${color}"></div>
+            </div>
+            <div class="result-meta">Min: CPU ${item.game.cpu}, GPU tier ${item.game.gpu}, ${item.game.ram}GB RAM, ${item.game.storage}GB storage — Platforms: ${item.game.os.join(', ')}</div>
+            ${issuesHtml}
+            ${tipsHtml}
+          </div>
+        `;
+      }).join('');
+    }
+ 
+    document.getElementById('checkBtn').addEventListener('click', () => {
+       const spec = {
+         cpu: document.getElementById('cpu').value,
+         gpu: Number(document.getElementById('gpu').value),
+         ram: Number(document.getElementById('ram').value),
+         storage: Number(document.getElementById('storage').value),
+         os: document.getElementById('os').value
+       };
+ 
+       const scored = games.map(g => scoreGame(spec, g)).sort((a,b) => b.score - a.score);
+       renderResults(scored);
+     });
+ 
+     document.getElementById('resetBtn').addEventListener('click', () => {
+       document.getElementById('cpu').value = 'low';
+       document.getElementById('gpu').value = '1';
+       document.getElementById('ram').value = '8';
+       document.getElementById('storage').value = '50';
+       document.getElementById('os').value = 'Windows 10';
+       document.getElementById('results').innerHTML = '';
+     });
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const q = document.getElementById('gameSearch').value.trim();
+      performSearch(q);
+    });
+    document.getElementById('gameSearch').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') performSearch(e.target.value.trim());
+    });
+    document.getElementById('clearSearch').addEventListener('click', () => {
+      document.getElementById('gameSearch').value = '';
+      document.getElementById('gameDetails').innerHTML = '';
+      document.getElementById('results').innerHTML = '';
+    });
+
+    // --- START: THEME TOGGLE SCRIPT ---
+    (function(){
+      const btn = document.getElementById('themeToggle');
+
+      // Function to apply the selected theme
+      function applyTheme(t){
+        if(t === 'dark'){
+          document.body.classList.add('theme-dark');
+          btn.textContent = '☀️'; // Sun icon
+          btn.setAttribute('aria-label','Switch to light theme');
+        } else {
+          document.body.classList.remove('theme-dark');
+          btn.textContent = '🌙'; // Moon icon
+          btn.setAttribute('aria-label','Switch to dark theme');
+        }
+      }
+
+      // Check for saved theme in localStorage
+      const saved = localStorage.getItem('recop-theme');
+      if(saved){
+        applyTheme(saved);
+      } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches){
+        // Check for OS preference
+        applyTheme('dark');
+      } else {
+        // Default to light
+        applyTheme('light');
+      }
+
+      // Add click event listener to the button
+      btn.addEventListener('click', () => {
+        // Toggle the .theme-dark class on the body
+        const isDark = document.body.classList.toggle('theme-dark');
+        // Apply the new theme
+        applyTheme(isDark ? 'dark' : 'light');
+        // Save the preference to localStorage
+        localStorage.setItem('recop-theme', isDark ? 'dark' : 'light');
+      });
+    })();
+    // --- END: THEME TOGGLE SCRIPT ---
+  </script>
+</body>
+</html>

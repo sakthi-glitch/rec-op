@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>rec-op — Contact</title>
+  <style>
+    /* Theme variables (light by default) */
+    :root{
+      --accent-blue:#0b79d0;
+      --accent-green:#2e7d32;
+      --accent:var(--accent-blue);
+      --bg:#f7f9fb;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#666;
+      --white:#ffffff;
+      --black:#000000;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 1px 6px rgba(11,23,40,0.06);
+      --transition: 180ms ease-in-out;
+    }
+
+    body.theme-dark{
+      --accent:var(--accent-green);
+      --bg:#07080a;           /* near-black page bg */
+      --card:#0f1113;         /* dark card */
+      --text:#e6eef6;         /* light text */
+      --muted:#9aa5b1;
+      --white:#000000;
+      --glass: rgba(0,0,0,0.35);
+      --shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    
+    /* Base Styles */
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:background var(--transition), color var(--transition);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    header{
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      transition:background var(--transition), border-color var(--transition);
+    }
+    body.theme-dark header{
+      background: linear-gradient(90deg, rgba(15,17,19,0.6), rgba(15,17,19,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    
+    .brand{font-weight:700;display:flex;gap:8px;align-items:center}
+    .brand a{color:var(--text); text-decoration:none;}
+    .brand a strong{color:var(--accent);letter-spacing:0.2px}
+
+    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600}
+    /* Style for the active navigation link */
+    nav a.active{
+      color:var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+    }
+    
+    .hero{padding:48px 20px;text-align:center}
+    .hero h1{margin:0 0 12px;font-size:28px;color:var(--accent)}
+    .hero p{margin:0 0 20px;color:var(--muted)}
+    
+    .features{
+      display:grid;
+      gap:16px;
+      padding:20px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); /* Adjusted grid for contact elements */
+      max-width:1000px;
+      margin: 0 auto;
+    }
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      transition:background var(--transition), box-shadow var(--transition), color var(--transition);
+      color:var(--text);
+    }
+    footer{padding:16px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.06);background:var(--card);margin-top:40px;}
+    @media(min-width:760px){.hero h1{font-size:40px}}
+
+    /* Form Styles */
+    label{display:block;font-size:14px;color:var(--text); margin-bottom: 4px;}
+    input[type="text"], input[type="email"], textarea{
+      width:100%; 
+      padding:10px; 
+      margin-bottom:15px; 
+      border: 1px solid rgba(0,0,0,0.1); 
+      border-radius: 6px; 
+      background: transparent; 
+      color: var(--text);
+      box-sizing: border-box; /* Include padding in the element's total width and height */
+    }
+    body.theme-dark input[type="text"], body.theme-dark input[type="email"], body.theme-dark textarea{
+      border-color: rgba(255,255,255,0.1);
+    }
+    
+    /* Theme toggle button */
+    .small-btn{
+      padding:8px 10px;
+      border-radius:6px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      background:transparent;
+      color:var(--text);
+      transition:background var(--transition), color var(--transition);
+    }
+    .small-btn:hover{background:var(--glass)}
+    .theme-controls{display:flex;gap:8px;align-items:center}
+
+  </style>
+</head>
+<body>
+  
+  <header>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="brand">
+        <a href="index.html"><strong>rec-op</strong></a>
+      </div>
+      <nav style="margin-left:12px">
+        <a href="homepage.html">Home</a>
+        <a href="features page.html">Features</a>
+        <a href="contact page.html" class="active">Contact</a>
+      </nav>
+    </div>
+
+    <div class="theme-controls">
+      <button id="themeToggle" class="small-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you. Reach out through the form or connect with us on social media.</p>
+    </section>
+
+    <section class="features">
+      <div class="card" style="grid-column: 1 / -1;">
+        <h3>Send a Message ✉️</h3>
+        <form>
+          <label for="contact-name">Name</label>
+          <input id="contact-name" type="text" placeholder="Your Name" required>
+          
+          <label for="contact-email">Email</label>
+          <input id="contact-email" type="email" placeholder="Your Email" required>
+          
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" rows="4" placeholder="Your Message..." style="resize: vertical;" required></textarea>
+          
+          <button type="submit" style="padding:10px 15px; background:var(--accent); color:var(--white); border:none; border-radius:6px; cursor:pointer; font-weight: 600;">Send Inquiry</button>
+        </form>
+      </div>
+      
+      <div class="card" style="text-align:center;">
+        <h3>Instagram 📸</h3>
+        <p style="color:var(--muted)">Scan the QR code to follow us and stay updated!</p>
+        <img src="1000029517.png" alt="Instagram QR Code for the rec-op account" style="max-width:100%; height:auto; border-radius:8px; margin-top:10px; box-shadow: var(--shadow);">
+      </div>
+
+      <div class="card">
+        <h3>Other Contact Details 📧</h3>
+        <p style="margin-top:10px;">
+          <strong>Support/Business:</strong> <br>
+          <a href="mailto:support@rec-op.com" style="color:var(--accent); text-decoration:none; font-weight:600;">support@rec-op.com</a>
+        </p>
+        <p style="margin-top:15px;">
+          <strong>Twitter/X:</strong> <br>
+          <a href="#" style="color:var(--accent); text-decoration:none; font-weight:600;">@recop_tech</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 rec-op — Built with a love for gaming.
+  </footer>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('themeToggle');
+
+      function applyTheme(t){
+        if(t === 'dark'){
+          document.body.classList.add('theme-dark');
+          btn.textContent = '☀️';
+          btn.setAttribute('aria-label','Switch to light theme');
+        } else {
+          document.body.classList.remove('theme-dark');
+          btn.textContent = '🌙';
+          btn.setAttribute('aria-label','Switch to dark theme');
+        }
+      }
+
+      const saved = localStorage.getItem('recop-theme');
+      if(saved){
+        applyTheme(saved);
+      } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches){
+        applyTheme('dark');
+      } else {
+        applyTheme('light');
+      }
+
+      btn.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        applyTheme(isDark ? 'dark' : 'light');
+        localStorage.setItem('recop-theme', isDark ? 'dark' : 'light');
+      });
+    })();
+  </script>
+</body>
+</html>

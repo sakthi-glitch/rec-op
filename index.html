@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>rec-op — Welcome</title>
+  <style>
+    /* Theme variables (light by default) */
+    :root{
+      --accent-blue:#0b79d0;
+      --accent-green:#2e7d32;
+      --accent:var(--accent-blue);
+      --bg:#f7f9fb;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#666;
+      --white:#ffffff;
+      --black:#000000;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 1px 6px rgba(11,23,40,0.06);
+      --transition: 200ms ease-in-out;
+    }
+
+    /* Dark theme overrides */
+    body.theme-dark{
+      --accent:var(--accent-green);
+      --bg:#07080a;           /* near-black page bg */
+      --card:#0f1113;         /* dark card */
+      --text:#e6eef6;         /* light text */
+      --muted:#9aa5b1;
+      --white:#000000;
+      --glass: rgba(0,0,0,0.35);
+      --shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    /* Base */
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      transition:background var(--transition), color var(--transition);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    header{
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      transition:background var(--transition), border-color var(--transition);
+    }
+    body.theme-dark header{
+      background: linear-gradient(90deg, rgba(15,17,19,0.6), rgba(15,17,19,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .brand strong{color:var(--accent);letter-spacing:0.2px}
+    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600}
+    .hero{padding:48px 20px;text-align:center}
+    .hero h1{margin:0 0 12px;font-size:28px;color:var(--accent)}
+    .hero p{margin:0 0 20px;color:var(--muted)}
+    .features{display:grid;gap:16px;padding:20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      transition:background var(--transition), box-shadow var(--transition), color var(--transition);
+      color:var(--text);
+    }
+    footer{padding:16px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.06);background:var(--card)}
+    @media(min-width:760px){.hero h1{font-size:40px}}
+
+    /* Theme toggle button */
+    .small-btn{
+      padding:8px 10px;
+      border-radius:6px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      background:transparent;
+      color:var(--text);
+      transition:background var(--transition), color var(--transition);
+    }
+    .small-btn:hover{background:var(--glass)}
+    .theme-controls{display:flex;gap:8px;align-items:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="brand"><strong>rec-op</strong></div>
+      <nav style="margin-left:12px">
+        <a href="homepage.html">Home</a>
+        <a href="features page.html">Features</a>
+        <a href="contact page.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="theme-controls">
+      <button id="themeToggle" class="small-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Welcome to rec-op</h1>
+      <p>Simple game compatibility checker — clean, fast, and easy to use.</p>
+      <p><a href="homepage.html" style="color:var(--white);background:var(--accent);padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:600">Get Started</a></p>
+    </section>
+
+    <section class="features">
+      <div class="card">
+        <h3>🎮 System Detection</h3>
+        <p>Find compatible games for your system model or custom PC with instant compatibility scoring.</p>
+      </div>
+      <div class="card">
+        <h3>✨ User Friendly</h3>
+        <p>Clean and intuitive interface designed for every user, from casual gamers to enthusiasts.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Performance Tips</h3>
+        <p>Get recommended settings for better gaming performance on your hardware.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 rec-op — Built with a love for gaming.
+  </footer>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('themeToggle');
+
+      function applyTheme(t){
+        if(t === 'dark'){
+          document.body.classList.add('theme-dark');
+          btn.textContent = '☀️';
+          btn.setAttribute('aria-label','Switch to light theme');
+        } else {
+          document.body.classList.remove('theme-dark');
+          btn.textContent = '🌙';
+          btn.setAttribute('aria-label','Switch to dark theme');
+        }
+      }
+
+      const saved = localStorage.getItem('recop-theme');
+      if(saved){
+        applyTheme(saved);
+      } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches){
+        applyTheme('dark');
+      } else {
+        applyTheme('light');
+      }
+
+      btn.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        applyTheme(isDark ? 'dark' : 'light');
+        localStorage.setItem('recop-theme', isDark ? 'dark' : 'light');
+      });
+    })();
+  </script>
+</body>
+</html>
