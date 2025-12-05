@@ -131,12 +131,12 @@
   <header>
     <div style="display:flex;gap:12px;align-items:center">
       <div class="brand">
-        <a href="index.html"><strong>rec-op</strong></a>
+        <a href="fonrt page.html"><strong>rec-op</strong></a>
       </div>
       <nav style="margin-left:12px">
         <a href="homepage.html">Home</a>
-        <a href="features page.html">Features</a>
-        <a href="contact page.html" class="active">Contact</a>
+        <a href="features.html">Features</a>
+        <a href="contact.html" class="active">Contact</a>
       </nav>
     </div>
 
@@ -152,37 +152,32 @@
     </section>
 
     <section class="features">
-      <div class="card" style="grid-column: 1 / -1;">
-        <h3>Send a Message ✉️</h3>
-        <form>
-          <label for="contact-name">Name</label>
-          <input id="contact-name" type="text" placeholder="Your Name" required>
-          
-          <label for="contact-email">Email</label>
-          <input id="contact-email" type="email" placeholder="Your Email" required>
-          
-          <label for="contact-message">Message</label>
-          <textarea id="contact-message" rows="4" placeholder="Your Message..." style="resize: vertical;" required></textarea>
-          
-          <button type="submit" style="padding:10px 15px; background:var(--accent); color:var(--white); border:none; border-radius:6px; cursor:pointer; font-weight: 600;">Send Inquiry</button>
-        </form>
-      </div>
-      
       <div class="card" style="text-align:center;">
         <h3>Instagram 📸</h3>
         <p style="color:var(--muted)">Scan the QR code to follow us and stay updated!</p>
-        <img src="1000029517.png" alt="Instagram QR Code for the rec-op account" style="max-width:100%; height:auto; border-radius:8px; margin-top:10px; box-shadow: var(--shadow);">
+        <img src="IMG_20251130_180426_561.png" alt="Instagram QR Code for the rec-op account" style="max-width:100%; height:auto; border-radius:8px; margin-top:10px; box-shadow: var(--shadow);">
+        <p style="margin-top:10px;">
+          <a href="https://www.instagram.com/rec_society?igsh=MTd1ejBtOG10d2I0eQ==" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 14px;background:var(--accent);color:var(--white);border-radius:8px;text-decoration:none;font-weight:600;">
+            Follow on Instagram
+          </a>
+        </p>
+      </div>
+
+      <div class="card" style="text-align:center;">
+        <h3>YouTube 🎬</h3>
+        <p style="color:var(--muted)">Subscribe to our channel for gaming content and updates!</p>
+        <p style="margin-top:10px;">
+          <a href="https://youtube.com/@rec-society-op?si=ooF7H2-NJz39TC8i" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 14px;background:var(--accent);color:var(--white);border-radius:8px;text-decoration:none;font-weight:600;">
+            Subscribe on YouTube
+          </a>
+        </p>
       </div>
 
       <div class="card">
         <h3>Other Contact Details 📧</h3>
         <p style="margin-top:10px;">
           <strong>Support/Business:</strong> <br>
-          <a href="mailto:support@rec-op.com" style="color:var(--accent); text-decoration:none; font-weight:600;">support@rec-op.com</a>
-        </p>
-        <p style="margin-top:15px;">
-          <strong>Twitter/X:</strong> <br>
-          <a href="#" style="color:var(--accent); text-decoration:none; font-weight:600;">@recop_tech</a>
+          <a href="mailto:recsakthi@gmail.com" style="color:var(--accent); text-decoration:none; font-weight:600;">recsakthi@gmail.com</a>
         </p>
       </div>
     </section>
@@ -221,6 +216,28 @@
         const isDark = document.body.classList.toggle('theme-dark');
         applyTheme(isDark ? 'dark' : 'light');
         localStorage.setItem('recop-theme', isDark ? 'dark' : 'light');
+      });
+
+      // Send inquiry via mailto: when user submits the form
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+
+        if(!name || !email || !message){
+          alert('Please fill all fields.');
+          return;
+        }
+
+        const to = 'recsakthi@gmail.com';
+        const subject = encodeURIComponent(`Website Inquiry from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+
+        // open user's mail client with prefilled email
+        window.location.href = mailto;
       });
     })();
   </script>
